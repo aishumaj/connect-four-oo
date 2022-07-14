@@ -12,10 +12,11 @@ class Game {
     this.height = height;
     this.currPlayer = 1;
     this.board = [];
+    this.handleClick = this.handleClick.bind(this);
     this.makeBoard();
     this.makeHtmlBoard();
-
   }
+
   makeBoard() {
     console.log("makeBoard, this is", this);
     for (let y = 0; y < this.height; y++) {
@@ -31,7 +32,7 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', this.handleClick.bind(this));
+    top.addEventListener('click', this.handleClick);
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -108,7 +109,9 @@ class Game {
   }
 
   endGame(msg) {
+    const top = document.getElementById("column-top");
     alert(msg);
+    top.removeEventListener("click",this.handleClick);
   }
 
   checkForWin() {
@@ -144,10 +147,13 @@ class Game {
       }
     }
   }
+}
+
+class Player{
 
 }
 
 let button = document.getElementById("start-button");
-button.addEventListener("click", new Game);
+button.addEventListener("click", ()=> {new Game;});
 //new Game(6, 7);
 
