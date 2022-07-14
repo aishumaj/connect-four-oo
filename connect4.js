@@ -1,3 +1,4 @@
+"use strict";
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -116,7 +117,7 @@ class Game {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
-    let _win = cells =>
+    const _win = cells =>
       cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -146,6 +147,7 @@ class Game {
 
 }
 
-
-new Game(6, 7);
+let button = document.getElementById("start-button");
+button.addEventListener("click", new Game);
+//new Game(6, 7);
 
