@@ -7,12 +7,11 @@
  */
 
 class Game {
-  constructor(width = 7, height = 6, p1, p2) {
+  constructor(width = 7, height = 6, ...players) {
     this.width = width;
     this.height = height;
-    this.p1 = p1;
-    this.p2 = p2;
-    this.currPlayer = this.p1;
+    this.players = [...players];
+    this.currPlayer = this.players[0];
     this.board = [];
     this.handleClick = this.handleClick.bind(this);
     this.makeBoard();
@@ -86,7 +85,7 @@ class Game {
     }
 
     // switch players
-    this.currPlayer = this.currPlayer === this.p1 ? this.p2 : this.p1;
+    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
   }
 
   findSpotForCol(x) {
