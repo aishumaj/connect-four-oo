@@ -7,10 +7,12 @@
  */
 
 class Game {
-  constructor(width = 7, height = 6) {
+  constructor(width = 7, height = 6, p1, p2) {
     this.width = width;
     this.height = height;
-    this.currPlayer = 1;
+    this.p1 = p1;
+    this.p2 = p2;
+    this.currPlayer = this.p1;
     this.board = [];
     this.handleClick = this.handleClick.bind(this);
     this.makeBoard();
@@ -75,7 +77,7 @@ class Game {
 
     // check for win
     if (this.checkForWin()) {
-      return this.endGame(`Player ${this.currPlayer} won!`);
+      return this.endGame(`Player ${this.currPlayer.color} won!`);
     }
 
     // check for tie
@@ -84,7 +86,7 @@ class Game {
     }
 
     // switch players
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+    this.currPlayer = this.currPlayer === this.p1 ? this.p2 : this.p1;
   }
 
   findSpotForCol(x) {
@@ -101,8 +103,9 @@ class Game {
     console.log("placeInTable, this is", this);
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.classList.add(`p${this.currPlayer}`);
+    piece.classList.add(`${this.currPlayer.color}`);
     piece.style.top = -50 * (y + 2);
+    piece.style.backgroundColor = this.currPlayer.color;
 
     const spot = document.getElementById(`${y}-${x}`);
     spot.append(piece);
@@ -150,10 +153,18 @@ class Game {
 }
 
 class Player{
-
+  constructor(color) {
+    this.color = color;
+  }
 }
 
 let button = document.getElementById("start-button");
-button.addEventListener("click", ()=> {new Game;});
+button.addEventListener("click",
+  ()=> {let p1Color = document.getElementById("p1-color").value;
+        let p2Color = document.getElementById("p2-color").value;
+        let p1 = new Player(p1Color);
+        let p2 = new Player(p2Color);
+
+        new Game(6, 7, p1, p2);});
 //new Game(6, 7);
 
