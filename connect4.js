@@ -114,7 +114,7 @@ class Game {
   endGame(msg) {
     const top = document.getElementById("column-top");
     alert(msg);
-    top.removeEventListener("click",this.handleClick);
+    top.removeEventListener("click", this.handleClick);
   }
 
   checkForWin() {
@@ -152,19 +152,19 @@ class Game {
   }
 }
 
-class Player{
+class Player {
   constructor(color) {
     this.color = color;
   }
 }
 
-let button = document.getElementById("start-button");
-button.addEventListener("click",
-  ()=> {let p1Color = document.getElementById("p1-color").value;
-        let p2Color = document.getElementById("p2-color").value;
-        let p1 = new Player(p1Color);
-        let p2 = new Player(p2Color);
+const button = document.getElementById("start-button");
+button.addEventListener("click", () => {
+  const p1Color = document.getElementById("p1-color").value;
+  const p2Color = document.getElementById("p2-color").value;
+  const p1 = new Player(p1Color);
+  const p2 = new Player(p2Color);
 
-        new Game(6, 7, p1, p2);});
-//new Game(6, 7);
+  new Game(6, 7, p1, p2);
+});
 
